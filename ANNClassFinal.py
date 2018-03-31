@@ -1,6 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
-
 
 ###test data####
 trainFeatures1 = np.array( [[0,0,1],
@@ -116,16 +114,17 @@ class ANN():
         for count, (diff, weigh) in enumerate(zip(self.pdifferentials, self.weights)):
             self.weights[count] -= self.pdifferentials[len(self.pdifferentials)-(count+1)] 
 
-    def run(self):
+    def run(self, printError=False):
 
         self.initialiseWeights()
+        
         for iter in range(self.iterations):
             self.forwardProp()
             self.getError()
             self.backProp()
             self.updateWeights()
-            
-        print(self.getError())
+        if printError = True:
+          print(self.getError())
 
 neuralNet1 = ANN(trainFeatures1,trainLabels1,layersAndWeights,"sigmoid",15000)
 neuralNet1.run()
