@@ -123,9 +123,9 @@ class ANN():
             self.getError()
             self.backProp()
             self.updateWeights()
-        if printError = True:
+        if printError == True:
           print(self.getError())
 
 neuralNet1 = ANN(trainFeatures1,trainLabels1,layersAndWeights,"sigmoid",15000)
-neuralNet1.run()
+neuralNet1.run(True)
     
