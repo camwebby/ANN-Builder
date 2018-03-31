@@ -128,7 +128,7 @@ class ANN():
             self.backProp()
             self.updateWeights()
             if costGraph==True:
-                if iter % 3 == 0:
+                if iter % int(self.iterations*0.01) == 0:
                     self.averageCost.append(abs(np.mean(self.getError())))
                     self.interval.append(iter)
            
