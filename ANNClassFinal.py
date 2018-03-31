@@ -13,8 +13,7 @@ trainLabels1 = np.array([[0,1,1,0,0]]).T
 
 
 ##Example network with 3 layers, the first having 6 neurons, second having 2, third having 3:
-layersAndWeights = np.array([[6], [2], [3]])
-
+layersAndWeights = np.array([[6],[2],[3]])
 
 ##neurons and weights form: [[x],[y],[z]],
 ##where dimesions of array show how many layers and value in each
@@ -117,7 +116,6 @@ class ANN():
             self.weights[count] -= self.pdifferentials[len(self.pdifferentials)-(count+1)] 
 
 
-    
     def run(self, printError=False, costGraph=False):
 
         self.averageCost = []
