@@ -1,4 +1,5 @@
 import numpy as np
+from matplotlib import pyplot as plt
 
 ###test data####
 trainFeatures1 = np.array( [[0,0,1],
@@ -18,6 +19,7 @@ layersAndWeights = np.array([[6], [2], [3]])
 ##neurons and weights form: [[x],[y],[z]],
 ##where dimesions of array show how many layers and value in each
 ##shows the weights per layer
+##One can have as many layers as one desires, e.g. [[x]] for one layer, or [[],[],[],[],[],[],[],........[]] 
 
 
 ##defining the class
@@ -114,7 +116,12 @@ class ANN():
         for count, (diff, weigh) in enumerate(zip(self.pdifferentials, self.weights)):
             self.weights[count] -= self.pdifferentials[len(self.pdifferentials)-(count+1)] 
 
-    def run(self, printError=False):
+
+    
+    def run(self, printError=False, costGraph=False):
+
+        self.averageCost = []
+        self.interval = []
 
         self.initialiseWeights()
         
@@ -123,9 +130,22 @@ class ANN():
             self.getError()
             self.backProp()
             self.updateWeights()
+            if costGraph==True:
+                if iter % 3 == 0:
+                    self.averageCost.append(abs(np.mean(self.getError())))
+                    self.interval.append(iter)
+           
         if printError == True:
           print(self.getError())
 
-neuralNet1 = ANN(trainFeatures1,trainLabels1,layersAndWeights,"sigmoid",15000)
-neuralNet1.run(True)
-    
+        if costGraph==True:           
+            plt.plot(neuralNet1.interval, neuralNet1.averageCost)
+            plt.show()
+
+
+if __name__ == "__main__":
+    neuralNet1 = ANN(trainFeatures1,trainLabels1,layersAndWeights,"sigmoid",2000)
+    neuralNet1.run(True,True)
+
+
+
