@@ -77,7 +77,6 @@ class ANN():
 
     def forwardProp(self):
         X = self.trainFeatures
-##        z2 = np.dot(X, self.weights[0])
         self.zn = [X]
         self.an = [X]
 
@@ -142,8 +141,8 @@ class ANN():
 
 
 if __name__ == "__main__":
-    neuralNet1 = ANN(trainFeatures1,trainLabels1,layersAndWeights,"sigmoid",2000)
-    neuralNet1.run(True,True)
+    neuralNet1 = ANN(trainFeatures=trainFeatures1, trainLabels=trainLabels1, dimensions=layersAndWeights, activation="sigmoid", iterations=2000)
+    neuralNet1.run(printError=True,costGraph=True)
 
 
 
