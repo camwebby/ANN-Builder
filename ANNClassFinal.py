@@ -93,26 +93,26 @@ class ANN():
         error = self.getError()
         
         self.deltas = []
-        self.pdifferentials = []
+        self.pderivatives = []
         
-        #finding partial differential of error with respect to the last weight(s)
+        #finding partial derivative of error with respect to the last weight(s)
         deltan = np.multiply(-(error), self.activationFunc(self.activation, self.an[len(self.an) - 1], True))
         dEdwn = np.dot(self.zn[len(self.zn) - 2].T, deltan)
         self.deltas.append(deltan)
-        self.pdifferentials.append(dEdwn)
+        self.pderivatives.append(dEdwn)
         
-        #finding the partial differential of error with respect to the remenaining weight(s)
+        #finding the partial derivative(s) of error with respect to the remenaining weight(s)
         for count, idk in enumerate(self.zn):
             if count < len(self.zn)-2:
                 self.deltas.append(np.dot(self.deltas[count], self.weights[len(self.weights) - (count+1)].T)*self.activationFunc(self.activation, self.an[len(self.an) - (count+2)] , True))
-                self.pdifferentials.append( np.dot( self.zn[len(self.zn) - (count+3)].T, self.deltas[count+1]))
+                self.pderivatives.append( np.dot( self.zn[len(self.zn) - (count+3)].T, self.deltas[count+1]))
             else:
                 break
           
     def updateWeights(self):
 
-        for count, (diff, weigh) in enumerate(zip(self.pdifferentials, self.weights)):
-            self.weights[count] -= self.pdifferentials[len(self.pdifferentials)-(count+1)] 
+        for count, (diff, weigh) in enumerate(zip(self.pderivatives, self.weights)):
+            self.weights[count] -= self.pderivatives[len(self.pderivatives)-(count+1)] 
 
 
     def run(self, printError=False, costGraph=False):
