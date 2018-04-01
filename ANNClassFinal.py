@@ -136,7 +136,7 @@ class ANN():
           print(self.getError())
 
         if costGraph==True:           
-            plt.plot(neuralNet1.interval, neuralNet1.averageCost)
+            plt.plot(self.interval, self.averageCost)
             plt.show()
 
 
