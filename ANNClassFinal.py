@@ -24,7 +24,7 @@ layersAndWeights = np.array([[6],[2],[3]])
 ##defining the class
 class ANN():
 
-##one can specify the following variables when creating the network:
+##one can specify the following parameters when creating the network:
     def __init__(self, trainFeatures, trainLabels, dimensions, activation, iterations):
 
         self.trainFeatures = trainFeatures
